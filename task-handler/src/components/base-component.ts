@@ -1,45 +1,41 @@
-namespace App {
-  //Component Base Class
-  export abstract class Component<
-    T extends HTMLElement,
-    U extends HTMLElement
-  > {
-    //abstract - we cant instantiate it, its meant to be used for inheritance only
-    templateElement: HTMLTemplateElement;
-    hostElement: T;
-    element: U;
+//Component Base Class
 
-    constructor(
-      templateId: string,
-      hostElementId: string,
-      insertAtStart: boolean,
-      newElementId?: string
-    ) {
-      this.templateElement = document.getElementById(
-        templateId
-      )! as HTMLTemplateElement;
-      this.hostElement = document.getElementById(hostElementId)! as T;
+export abstract class Component<T extends HTMLElement, U extends HTMLElement> {
+  //abstract - we cant instantiate it, its meant to be used for inheritance only
+  templateElement: HTMLTemplateElement;
+  hostElement: T;
+  element: U;
 
-      const importedNode = document.importNode(
-        this.templateElement.content,
-        true
-      );
-      this.element = importedNode.firstElementChild as U;
-      if (newElementId) {
-        this.element.id = newElementId;
-      }
-      this.attach(insertAtStart);
+  constructor(
+    templateId: string,
+    hostElementId: string,
+    insertAtStart: boolean,
+    newElementId?: string
+  ) {
+    this.templateElement = document.getElementById(
+      templateId
+    )! as HTMLTemplateElement;
+    this.hostElement = document.getElementById(hostElementId)! as T;
+
+    const importedNode = document.importNode(
+      this.templateElement.content,
+      true
+    );
+    this.element = importedNode.firstElementChild as U;
+    if (newElementId) {
+      this.element.id = newElementId;
     }
-
-    private attach(insertAtBegining: boolean) {
-      //attach - render this list to the DOM
-      this.hostElement.insertAdjacentElement(
-        insertAtBegining ? "afterbegin" : "beforeend",
-        this.element
-      );
-    }
-
-    abstract configure(): void;
-    abstract renderContent(): void;
+    this.attach(insertAtStart);
   }
+
+  private attach(insertAtBegining: boolean) {
+    //attach - render this list to the DOM
+    this.hostElement.insertAdjacentElement(
+      insertAtBegining ? "afterbegin" : "beforeend",
+      this.element
+    );
+  }
+
+  abstract configure(): void;
+  abstract renderContent(): void;
 }
