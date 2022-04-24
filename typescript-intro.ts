@@ -1,4 +1,6 @@
-/* 
+/* For detailed explanations visit notes from course at: https://github.com/themaximehardy/understanding-typescript
+
+
 TypeScript is A JavaScript Superset. Its a Language building up on JavaScript. Adds new Features + Advantages to JavaScript. It cant be executed by browser environment. 
 
 TypeScript is compiled to JavaScript. TypeScript compiler compiles features to JS workarounds and possible errors are thrown. TypeScript ADDS TYPES.
@@ -35,6 +37,14 @@ Type aliases can be used to create our own types. We are not limited to storing 
 type User = { name: string; age: number };
 const u1: User = { name: "Slobodan", age: 30 };
 
+FOR LIVE SERVER THAT TRACKS CHANGES AS THEY HAPPEN AND AS FILE IS SAVED USE:
+npm init
+npm install lite-server --save-dev
+Than in your package.json add this to scripts
+"start": "lite-server"
+Make sure you have an index.html file within this folder and than just run
+npm start
+
 
 TO USE WATCH MODE TYPE tsc FILENAME.ts -w (or --watch)    THIS WILL WATCH ONLY ONE FILE
 
@@ -42,7 +52,7 @@ To WATCH WHOLE PROJECT run tsc --init       it will create tsconfig.json file
 AFTER THAT we can just run the command tsc or if we want WHOLE PROJECT tsc -w
 
 
-If we add "exclude": [filenametoexclude.js] to tsconfig.json we will exclude that files from compilation process, we can also put ".dev.ts" to exclude all files with this patern (ending .dev.ts)
+If we add "exclude": [filenametoexclude.js] to tsconfig.json we will exclude that files from compilation process, we can also put ".dev.ts" to exclude all files with this pattern (ending .dev.ts)
 
 IF we set "include": [] then only files included will be compiled
 
@@ -58,4 +68,18 @@ IF we set "include": [] then only files included will be compiled
 "sourceMap": true,    helps with debugging and development, opening developer tools, then sources, when true is active we can see .ts files code
 
 "outDir": "./dist",   place our JS files in the dist folder
+"rootDir": "./src",   make sure TSC compiler to look in that folder, so only files from that directory will be included in dist
+
+"noEmit": true,       we set this if we dont want to emit JS files
+
+"downlevelIteration": true,   if we compile to older versions of JS and we have problems with for loops we turn this on and it will compile in a way that it works
+
+"noEmitOnError": true   if we have errors nothing will be generated to JS file, default setting is false
+
+
+"strict": true,   set all strict options to true without having to set them separately one by one
+"strictNullChecks": true,  how to work with values that might return null, for example document.querySelector("button"), we dont know if it will find a button element
+"strictFunctionTypes": true,    is related to Function Types we might set
+"strictBindCallApply": true,    ensures that we use bind, call and apply in a right way
+
 */
